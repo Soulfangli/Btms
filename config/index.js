@@ -3,22 +3,23 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 module.exports = {
   dev: {
-    proxyTable: {
-      '/api': {
-        target: '192.168.8.83:80/', //接口域名 
-        changeOrigin: true, //是否跨域
-        pathRewrite: {
-          '^api': '' //需要rewrite重写的
-        }
-      }
-    },
+    // proxyTable: {
+    //   '/api': {
+    //     target: '192.168.8.83:80/', //接口域名 
+    //     changeOrigin: true, //是否跨域
+    //     pathRewrite: {
+    //       '^api': '' //需要rewrite重写的
+    //     }
+    //   }
+    // },
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    // proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -27,7 +28,26 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
+    
+    devServer: {
+      port: port,
+      open: true,
+      // https: true,
+      proxy: {
+          '/proxyapi': {
+              //要访问的跨域的域名
+              // target: 'https://test-www.yrdcarlife.com/api',
+              target: 'https://dev-www.yrdcarlife.com/api',
+              // target: 'http://10.41.4.77:8088', //本地联调，用完注释
+              ws: true,
+              pathRewrite: {
+                  '^/proxyapi': ''
+              },
+              changOrigin: true,
+              secure: true //默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器。如果你想要接受，修改配置
+          }
+      }
+  },
 
     /**
      * Source Maps

@@ -67,7 +67,7 @@ export default {
   top: 50%;
   width: 20%;
   transform: translate(-50%, -50%);
-  background-color: #1f2d3d !important;
+  /* background-color: #1f2d3d !important; */
   padding: 10px 30px;
   border-radius: 10px;
   border: 1px solid #fff;

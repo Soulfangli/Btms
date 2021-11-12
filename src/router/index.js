@@ -11,6 +11,8 @@ const tableFirst = () => import('@/views/example/table/tableFirst')
 const tableSecond = () => import('@/views/example/table/tableSecond')
 const day1 =() =>import('@/views/study/day1')
 const day2 =() =>import('@/views/study/day2')
+const day3 =() =>import('@/views/study/day3')
+const day4 =() =>import('@/views/study/day4')
 
 Vue.use(Router)
 // 固定的路由表
@@ -113,6 +115,24 @@ export const permissionRouter = [
         component: day2,
         meta: {
           title: "第二天",
+          icon: "el-icon-goods",
+          roles: ['admin']
+        },
+      },{
+        path: "day3",
+        name: "day3",
+        component: day3,
+        meta: {
+          title: "第三天",
+          icon: "el-icon-goods",
+          roles: ['admin']
+        },
+      },{
+        path: "day4",
+        name: "day4",
+        component: day4,
+        meta: {
+          title: "第四天",
           icon: "el-icon-goods",
           roles: ['admin']
         },
