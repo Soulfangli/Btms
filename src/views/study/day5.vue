@@ -151,7 +151,7 @@ export default {
     setTableBody() {
       let data = [
         {
-          createdName: "马丁的企业端",
+          createdName: "马丁的企业端0",
           createdTime: "2021-09-26 18:06:44",
           departmentName: "监管端部门根节点",
           isAdmin: 1,
@@ -167,7 +167,24 @@ export default {
           id: 0
         },
         {
-          createdName: "马丁的企业端",
+          createdName: "马丁的企业端1",
+          createdTime: "2021-09-23",
+          departmentName: "监管端部门根节点",
+          isAdmin: 1,
+          isAdminText: "是",
+          isPosition: 1,
+          isPositionText: "是",
+          lastLoginTime: null,
+          name: "系统管理员",
+          phone: "13900000000",
+          positionId: 2,
+          positionName: "管理员",
+          sex: 0,
+          statusText: "启用",
+          id: 1
+        },
+        {
+          createdName: "马丁的企业端2",
           createdTime: "2021-09-23",
           departmentName: "监管端部门根节点",
           isAdmin: 1,
@@ -181,8 +198,60 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 1
+          id: 2
         },
+        {
+          createdName: "马丁的企业端3",
+          createdTime: "2021-09-23",
+          departmentName: "监管端部门根节点",
+          isAdmin: 1,
+          isAdminText: "是",
+          isPosition: 1,
+          isPositionText: "是",
+          lastLoginTime: null,
+          name: "系统管理员",
+          phone: "13933333333",
+          positionId: 2,
+          positionName: "管理员",
+          sex: 0,
+          statusText: "启用",
+          id: 3
+        },
+        {
+          createdName: "马丁的企业端4",
+          createdTime: "2021-09-23",
+          departmentName: "监管端部门根节点",
+          isAdmin: 1,
+          isAdminText: "是",
+          isPosition: 1,
+          isPositionText: "是",
+          lastLoginTime: null,
+          name: "系统管理员",
+          phone: "13944444444",
+          positionId: 2,
+          positionName: "管理员",
+          sex: 0,
+          statusText: "启用",
+          id: 4
+        },
+        {
+          createdName: "马丁的企业端5",
+          createdTime: "2021-09-23",
+          departmentName: "监管端部门根节点",
+          isAdmin: 1,
+          isAdminText: "是",
+          isPosition: 1,
+          isPositionText: "是",
+          lastLoginTime: null,
+          name: "系统管理员",
+          phone: "13955555555",
+          positionId: 2,
+          positionName: "管理员",
+          sex: 0,
+          statusText: "启用",
+          id: 5
+        },
+
       ];
       let total = 2;
       this.searchForm.table.body = data;
@@ -233,7 +302,9 @@ export default {
     },
     deleteStaff(row){
         //过滤删除
-        this.searchForm.table.body = this.searchForm.table.body.filter(item => item.id===row.id )
+        //过滤，留下非点击ID的数组
+        this.searchForm.table.body = this.searchForm.table.body.filter(item => item.id !==row.id )
+        
     },
     //动态组件，编辑时调用
     updateStaff(row){
