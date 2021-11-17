@@ -7,35 +7,46 @@
 <template>
   <div>
     <tableContent
-      v-show="showModule=='list'"
+      v-show="showModule == 'list'"
       :prop-data="searchForm"
       @handleCurrentChange="handleCurrentChange"
       @handleSizeChange="handleSizeChange"
     />
-    <component 
-        :is="componentName" 
-        :propData="propData" 
-        @close="closeComponent"
+    <component
+      :is="componentName"
+      :propData="propData"
+      @close="closeComponent"
     />
+    <!--
+      简单的demo
+    -->
+    <div id="example">
+      <button @click="change">切换页面</button>
+      <component :is="currentView"></component>
+    </div>
   </div>
 </template>
 <script>
-import { tableContent} from "@/components";
-import AuditLog from '../study/components/AuditLog.vue'
+import { tableContent } from "@/components";
+import AuditLog from "../study/components/AuditLog.vue";
+
+var LZL = { template: "<div>林志玲</div>" };
+var GYY = { template: "<div>高圆圆</div>" };
+var JJW = { template: "<div>贾静雯</div>" };
 
 export default {
   name: "day1",
-  components: { tableContent , AuditLog},
+  components: { tableContent, AuditLog, LZL, GYY, JJW },
   data() {
     return {
       time: Date.now(),
       dialogVisible: false,
       showModule: "list", // 控制显示隐藏列表
-      componentName: '',  // 控制渲染那个子组件
-      propData:{
-            title: '信息查看',
-            type: 'see', // 操作类型
-            from: 'list', // 从哪里过去的，传组件名
+      componentName: "", // 控制渲染那个子组件
+      propData: {
+        title: "信息查看",
+        type: "see", // 操作类型
+        from: "list", // 从哪里过去的，传组件名
       },
       formData: {},
       //主页表格数据展示
@@ -95,10 +106,19 @@ export default {
           },
         },
       },
-     
       tableData: [],
+
+      index: 0, //简单的demo
+      arr: ["LZL", "GYY", "JJW"],
     };
   },
+  computed: {
+    //简单的demo
+    currentView() {
+      return this.arr[this.index];
+    },
+  },
+
   mounted() {
     this.setTableHead();
     this.search();
@@ -164,7 +184,7 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 0
+          id: 0,
         },
         {
           createdName: "马丁的企业端1",
@@ -181,7 +201,7 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 1
+          id: 1,
         },
         {
           createdName: "马丁的企业端2",
@@ -198,7 +218,7 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 2
+          id: 2,
         },
         {
           createdName: "马丁的企业端3",
@@ -215,7 +235,7 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 3
+          id: 3,
         },
         {
           createdName: "马丁的企业端4",
@@ -232,7 +252,7 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 4
+          id: 4,
         },
         {
           createdName: "马丁的企业端5",
@@ -249,9 +269,8 @@ export default {
           positionName: "管理员",
           sex: 0,
           statusText: "启用",
-          id: 5
+          id: 5,
         },
-
       ];
       let total = 2;
       this.searchForm.table.body = data;
@@ -291,52 +310,53 @@ export default {
     optionBtnClick(row, btn) {
       switch (btn.func) {
         case "update":
-          this.updateStaff(btn.label, row)
+          this.updateStaff(btn.label, row);
           break;
         case "delete":
-          this.deleteStaff(row)
+          this.deleteStaff(row);
           break;
         default:
           break;
       }
     },
-    deleteStaff(row){
-        //过滤删除
-        //过滤，留下非点击ID的数组
-        this.searchForm.table.body = this.searchForm.table.body.filter(item => item.id !==row.id )
-        
+    deleteStaff(row) {
+      //过滤删除
+      //过滤，留下非点击ID的数组
+      this.searchForm.table.body = this.searchForm.table.body.filter(
+        (item) => item.id !== row.id
+      );
     },
     //动态组件，编辑时调用
-    updateStaff(row){
-       this.propData = {
-                title: '审核历史',
-                type: 'see', // 操作类型
-                from: 'list', // 从哪里过去的，传组件名
-                bizType: [1,3],
-                id: row.id,
-                companyId: row.companyId,
-                driverSchoolId: row.driverSchoolId
-            }
-            this.showModule = ''
-            this.componentName = 'AuditLog'
+    updateStaff(row) {
+      this.propData = {
+        title: "审核历史",
+        type: "see", // 操作类型
+        from: "list", // 从哪里过去的，传组件名
+        bizType: [1, 3],
+        id: row.id,
+        companyId: row.companyId,
+        driverSchoolId: row.driverSchoolId,
+      };
+      this.showModule = "";
+      this.componentName = "AuditLog";
     },
     // 关闭组件，回到列表 或 上级组件
     closeComponent(index, emitData) {
-        if(emitData.from == 'list'){
-            // 1 回到列表要刷新列表
-            if (index==1) {
-                this.setTableBody()
-            }
-            this.componentName = ''
-            this.showModule = 'list'
-        }else{
-            emitData.title = {'AuditLog':'审核历史'}[emitData.from]
-            this.propData = emitData
-            this.showModule = ''
-            this.componentName = emitData.from
+      if (emitData.from == "list") {
+        // 1 回到列表要刷新列表
+        if (index == 1) {
+          this.setTableBody();
         }
+        this.componentName = "";
+        this.showModule = "list";
+      } else {
+        emitData.title = { AuditLog: "审核历史" }[emitData.from];
+        this.propData = emitData;
+        this.showModule = "";
+        this.componentName = emitData.from;
+      }
     },
-     /**
+    /**
      * 查看审核历史明细
      */
     // auditDetail(row) {
@@ -356,6 +376,10 @@ export default {
     bindClosed() {
       this.time = Date.now();
       this.search();
+    },
+    //简单的demo
+    change() {
+      this.index = ++this.index % 3;
     },
   },
 };
