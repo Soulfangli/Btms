@@ -31,7 +31,6 @@ export default {
       this.$nextTick(() => {
         console.log(this.$refs.ul1.childNodes.length);
       });
-      console.log(this.$refs.ul1.childNodes.length,'11111');
     }
   },
 };

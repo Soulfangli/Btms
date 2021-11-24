@@ -355,6 +355,7 @@ export default {
         this.showModule = "";
         this.componentName = emitData.from;
       }
+      console.log('123')
     },
     /**
      * 查看审核历史明细
