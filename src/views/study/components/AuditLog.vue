@@ -222,6 +222,7 @@ export default {
          */
         seeFn(row) {
             this.$emit('auditDetail', row)
+           
         },
         goback(index=null) {
             // this.$router.go(-1)

@@ -14,6 +14,7 @@ const day2 =() =>import('@/views/study/day2')
 const day3 =() =>import('@/views/study/day3')
 const day4 =() =>import('@/views/study/day4')
 const day5 =() =>import('@/views/study/day5')
+const day6 =() =>import('@/views/study/day6')
 
 Vue.use(Router)
 // 固定的路由表
@@ -143,6 +144,15 @@ export const permissionRouter = [
         component: day5,
         meta: {
           title: "第五天",
+          icon: "el-icon-goods",
+          roles: ['admin']
+        },
+      },{
+        path: "day6",
+        name: "day6",
+        component: day6,
+        meta: {
+          title: "第六天",
           icon: "el-icon-goods",
           roles: ['admin']
         },

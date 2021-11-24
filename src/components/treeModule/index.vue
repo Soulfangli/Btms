@@ -324,7 +324,7 @@ export default {
                 // 不同级进行处理
                 return false;
             }
-        }
+        },
     }
 }
 </script>
