@@ -263,7 +263,7 @@ export default {
             }
         },
         deletepositon(row) {
-
+            console.log('11111111')
             this.searchForm.table.body = this.searchForm.table.body.filter(
                 (item) => item.id !== row.id
             );
