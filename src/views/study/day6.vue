@@ -31,7 +31,7 @@ export default {
                         key: 'positionName',
                         value: '',
                         placeholder: '请输职位名称',
-                        span: 6,
+                        span: 12,
                     },
                 ],
                 pageinfo: {
@@ -304,12 +304,6 @@ export default {
             this.showModule = 'list'
         },
     },
-    // beforeRouteEnter (to, from, next) {
-    //     next(vm => {
-    //         vm.searchForm.searchFormItemArr.filter(it => it.key=='mzmc')[0].value = vm.$route.query.name
-    //         vm.search()
-    //     })
-    // }
 }
 </script>
 
