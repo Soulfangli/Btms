@@ -99,6 +99,7 @@ export default {
   },
   mounted() {
     this.handle();
+    this.handle1()
   },
   methods: {
     handle() {
@@ -118,8 +119,21 @@ export default {
       );
       console.log('this.arr:',this.arr ) //[ "", null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 25 ]
     },
-    handle1() {},
+    handle1() {
+      //从数组中2个值求和等于指定值；去重
+       let arr2 = [1,5,3,17,6,9,4,7,8,4]
+            function sum(arr2,num){
+                let map = new Map()
+                for (let i=0;i<arr2.length;i++){
+                    map.set(arr2[i],num-arr2[i])
+                }
+                console.log(map)//[{1,8},{3,6},{5,4}]
+            }
+            sum(arr2,9)
+    },
+
   },
+
 };
 </script>
 <style scoped>
