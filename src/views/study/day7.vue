@@ -33,17 +33,29 @@ export default {
                         placeholder: '请输入配置名称',
                         span: 6
                     },
-                    // {
-                    //     elementType: 'select',
-                    //     key: 'dataType',
-                    //     value: '',
-                    //     multiple: false,
-                    //     label: '值类型',
-                    //     labelWidth: 100,
-                    //     span: 6,
-                    //     placeholder: '请选择值类型',
-                    //     options: []
-                    // }
+                    {
+                        elementType: 'datePicker', //必填，日期选择器
+                        label: '上报时间',  //必填
+                        key: 'receiveTimeFrom',//必填
+                        value: [],  //必填
+                        type: 'daterange',  //必填 日期选择器的类型参考element
+                        valueformat: 'yyyy-MM-dd',  //日期格式
+                        startplaceholder: '开始时间',
+                        endplaceholder: '结束时间',
+                        placeholder: '请选择',
+                        span: 6
+                    },
+                    {
+                        elementType: 'select',
+                        key: 'dataType',
+                        value: '',
+                        multiple: false,
+                        label: '值类型',
+                        labelWidth: 100,
+                        span: 6,
+                        placeholder: '请选择值类型',
+                        options: []
+                    }
                 ],
                 pageinfo: {
                     currentPage: 1,
@@ -76,26 +88,24 @@ export default {
                                 func: 'seeDetail',
                                 type: 'text',
                                 inquiry: false,
-                                permission: { groupCode: '10006',code: 1 }
                             },
                             {
                                 label: '修改',
                                 func: 'update',
                                 type: 'text',
                                 inquiry: false,
-                                permission: { groupCode: '10006',code: 4 }
                             },
                             {
                                 label: '删除',
                                 func: 'delete',
                                 type: 'text',
                                 inquiry: false,
-                                permission: { groupCode: '10006',code: 8 }
                             }
                         ]
                     }
                 }
             },
+            datalist1:[]
             // paramsList: paramsList,
             // groupIds: [paramsList['groupIds']['ONE_VALUE_TYPE']],
             // showModule: "list", // 控制显示隐藏列表
@@ -107,22 +117,44 @@ export default {
     mounted() {
         this.setTableHead()
         // 获取搜索条件的待选项
-        // this.searchOptions() 
+        this.searchOptions() 
         // 获取表格数据
         this.search()
     },
     methods: {
         // 获取搜索栏所有待选项数据
-        // searchOptions() {
-        //     queryConfigByGroups({ groupIds: this.groupIds }).then(res => {
-        //         // console.log(res)
-        //         let options = res.data[this.paramsList['groupIds']['ONE_VALUE_TYPE']];
-        //         for (const it of options) {
-        //             it['label'] = it.text;
-        //         }
-        //         this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].options = options;
-        //     })
-        // },
+        searchOptions() {
+           this.datalist1 = [
+              {
+                value: '选项1',
+                label: '黄金糕'
+                }, {
+                value: '选项2',
+                label: '双皮奶'
+                }, {
+                value: '选项3',
+                label: '蚵仔煎'
+                }, {
+                value: '选项4',
+                label: '龙须面'
+                }, {
+                value: '选项5',
+                label: '北京烤鸭'
+             }
+            ]
+            this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].options = this.datalist1;
+            console.log(this.searchForm.searchFormItemArr,"1111")
+            //这里打印能够打印出来，但是，页面显示不了这里面的数据，就很奇怪
+
+            // queryConfigByGroups({ groupIds: this.groupIds }).then(res => {
+            //     // console.log(res)
+            //     let options = res.data[this.paramsList['groupIds']['ONE_VALUE_TYPE']];
+            //     for (const it of options) {
+            //         it['label'] = it.text;
+            //     }
+            //     this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].options = options;
+            // })
+        },
         /**
          * 设置表头
          */
