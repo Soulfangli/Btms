@@ -220,6 +220,7 @@ export default {
             this.searchForm.table.body = datalist
             this.searchForm.pageinfo.total = 2
 
+
             let params = {
                 // dataType: this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].value,
                 name: this.searchForm.searchFormItemArr.filter(it => it.key=='name')[0].value,
