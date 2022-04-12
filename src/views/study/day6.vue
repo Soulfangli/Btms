@@ -43,7 +43,10 @@ export default {
                     head: [],
                     body: [],
                     type: 'selection',
+                    isHiddenIndex: true, //去除序号
+                    selection:true, //添加多选框 添加的同时，需要添加handleSelectionChange(){}方法
                     // tableloading: true,
+                    // tableHeight: `calc(100vh - 285px)`,
                     btns: [
                         {
                             label: '新增',
@@ -73,7 +76,6 @@ export default {
                                 func: 'fixposition',
                                 type: 'text',
                                 inquiry: false,
-                                permission: { groupCode: '67002',code:4}
                             },
                             {
                                 label: '删除',
@@ -82,7 +84,6 @@ export default {
                                 color: '#F4333C',
                                 inquiry: true,
                                 msg: '确定删除此职位？',
-                                permission: { groupCode: '67002',code:8}
                             },
                         ],
                     },
@@ -303,6 +304,9 @@ export default {
             this.componentName = ''
             this.showModule = 'list'
         },
+        handleSelectionChange(val){
+            console.log(val)
+        }
     },
 }
 </script>

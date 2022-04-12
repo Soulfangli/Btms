@@ -35,7 +35,7 @@
                              @change="handleChange(item)"
                         >
                             <el-option
-                                v-for="opts in options"
+                                v-for="opts in item.options"
                                 :key="opts.value"
                                 :label="opts.label || opts.text"
                                 :value="opts.value"
@@ -84,7 +84,7 @@
                             class="search-checkboxGroup"
                             >
                             <el-checkbox 
-                                v-for="item in options"
+                                v-for="item in item.options"
                                 :key="item.value"
                                 :label="item.label || item.text"
                                 :value="item.value"
@@ -99,7 +99,7 @@
                             class="search-radioGroup"
                         >
                             <el-radio 
-                                 v-for="item in options"
+                                 v-for="item in item.options"
                                 :key="item.value"
                                 :label="item.label || item.text"
                                 :value="item.value"
@@ -125,7 +125,7 @@
                 </el-button>
             </div>
         </div>
-        <div class="component-container-table">
+        <div class="component-container-table" :style="{height: mainHeight}">
             <!--table上方按钮（一般位于右上方，例如：新增，导出，导入）-->
             <el-row :gutter="20" v-if="propData.table.btns && propData.table.btns.length">
                 <el-col :span="24" :offset="0">
@@ -257,7 +257,8 @@ export default {
             // pageSize: 10,
             // total: 0 //总条数
             showFormItemNum: this.propData.showFormItemNum || 0, // 收起或展开时，显示几个表单项【不需要伸展操作时，props不传该属性 或 传0】
-            isextend: false // 是否展开
+            isextend: false, // 是否展开
+            mainHeight: 0  //自适应table高度
         }
     },
     components: {
@@ -283,7 +284,15 @@ export default {
         },
         TableColumn
     },
+    mounted(){
+        //页脚固定底部
+        this.andeMainHeight()
+    },
     methods: {
+        //table高度自适应，页脚固定底部
+        andeMainHeight(){
+            this.mainHeight = `calc(100vh - 285px)`
+        },
         // 选择器组件，选中节点变化时触发
         handleChange(item){
             this.$emit('handleChange',item)

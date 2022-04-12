@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <tableContent
+        
             ref="contentTable"
             :prop-data="searchForm" 
             @handleSizeChange="handleSizeChange"
@@ -54,7 +55,8 @@ export default {
                         labelWidth: 100,
                         span: 6,
                         placeholder: '请选择值类型',
-                        options: []
+                        options: [
+                        ]
                     }
                 ],
                 pageinfo: {
@@ -67,14 +69,14 @@ export default {
                     body: [],
                     type: 'selection',
                     btns: [
-                        // {
-                        //     label: '新增',
-                        //     func: 'add',
-                        //     type: 'primary',
-                        //     icon: 'el-icon-plus',
-                        //     inquiry: false,
-                        //     permission: { groupCode: '10006',code: 2 }
-                        // }
+                        {
+                            label: '新增',
+                            func: 'add',
+                            type: 'primary',
+                            icon: 'el-icon-plus',
+                            inquiry: false,
+                            // VhasPermi: [ safety:recheck:recheck'] 
+                        }
                     ],
                     options: {
                         hidden: false,
@@ -105,7 +107,6 @@ export default {
                     }
                 }
             },
-            datalist1:[]
             // paramsList: paramsList,
             // groupIds: [paramsList['groupIds']['ONE_VALUE_TYPE']],
             // showModule: "list", // 控制显示隐藏列表
@@ -128,19 +129,19 @@ export default {
               {
                 value: '选项1',
                 label: '黄金糕'
-                }, {
+              }, {
                 value: '选项2',
                 label: '双皮奶'
-                }, {
+              }, {
                 value: '选项3',
                 label: '蚵仔煎'
-                }, {
+              }, {
                 value: '选项4',
                 label: '龙须面'
-                }, {
+              }, {
                 value: '选项5',
                 label: '北京烤鸭'
-             }
+              }
             ]
             this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].options = this.datalist1;
             console.log(this.searchForm.searchFormItemArr,"1111")
@@ -218,17 +219,18 @@ export default {
             ]
             this.searchForm.table.body = datalist
             this.searchForm.pageinfo.total = 2
-            // let params = {
-            //     // dataType: this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].value,
-            //     name: this.searchForm.searchFormItemArr.filter(it => it.key=='name')[0].value,
-            //     pageIndex: this.searchForm.pageinfo.currentPage,
-            //     pageSize: this.searchForm.pageinfo.pageSize
-            // }
-            // queryConfigGroup(params).then(res => {
-            //     this.searchForm.table.body = res.data.data
-            //     this.searchForm.pageinfo.total = res.data.total
-            // }).catch(error => {
-            // })
+
+            let params = {
+                // dataType: this.searchForm.searchFormItemArr.filter(it => it.key=='dataType')[0].value,
+                name: this.searchForm.searchFormItemArr.filter(it => it.key=='name')[0].value,
+                pageIndex: this.searchForm.pageinfo.currentPage,
+                pageSize: this.searchForm.pageinfo.pageSize
+            }
+            queryConfigGroup(params).then(res => {
+                this.searchForm.table.body = res.data.data
+                this.searchForm.pageinfo.total = res.data.total
+            }).catch(error => {
+            })
         },
         // 每页条数改变
         handleSizeChange(pageSize) {
@@ -284,8 +286,8 @@ export default {
             if (index == 1) {
                 this.setTableBody()
             }
-            // this.componentName = ''
-            // this.showModule = 'list'
+            this.componentName = ''
+            this.showModule = 'list'
         },
         // 删除
         deleteFn(row) {

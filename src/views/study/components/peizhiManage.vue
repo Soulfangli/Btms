@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import validateRule from '@/utils/validateRule'
+import Validate from '@/utils/validateRule'
 // import { queryConfigByGroups } from '@/api/common'
 // import { getConfigGroupById, addConfigGroupInfo, updateConfigGroup } from '@/api/selfSetting'
 export default {
@@ -73,12 +73,12 @@ export default {
         form: {
           name: "",
           dataType: "",
-          isExpand: 0
+          isExpand: ''
         },
         rules: {
-          dataType: [{ required: true, message: "请选择", trigger: ['blur', 'change'] }],
-          isExpand: [{ required: true, message: "请选择", trigger: ['blur', 'change'] }],
-          name: [{required: true, validator: (rule, value, callback) => validateRule.Str(rule, value, callback, '请输入'), trigger: "blur"}]
+          dataType: [{ required: true, message: "请2选择", trigger: ['blur', 'change'] }],
+          isExpand: [{ required: true, message: "请选3择", trigger: ['blur', 'change'] }],
+          name: [{required: true, validator:Validate.Str,trigger:'blur'}]
         },
         formLabelWidth: "110px",
         formContentWidth: "250px",
